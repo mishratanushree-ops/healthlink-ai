@@ -24,6 +24,11 @@ jobs:
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v3
 
+      - name: Configure gcloud
+        run: |
+          gcloud config set project gen-lang-client-0167173788
+          gcloud config set run/region asia-south1
+
       - name: Configure Docker
         run: |
           gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
@@ -39,4 +44,7 @@ jobs:
       - name: Deploy Cloud Run
         run: |
           gcloud run deploy healthlink-ai \
-            --image asia-south1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/healthlink-repo/healthlink-ai
+            --image asia-south1-docker.pkg.dev/gen-lang-client-0167173788/healthlink-repo/healthlink-ai:${{ github.sha }} \
+            --platform managed \
+            --region asia-south1 \
+            --allow-unauthenticated
