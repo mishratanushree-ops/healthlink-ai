@@ -1,0 +1,55 @@
+[project]
+name = "smart-health-management-system"
+version = "0.1.0"
+description = "GenAI Smart Health Management System"
+requires-python = ">=3.13"
+
+dependencies = [
+    # FastAPI and Server
+    "fastapi>=0.115.0",
+    "pydantic>=2.11.0",
+    "pydantic-settings>=2.10.0",
+    "uvicorn[standard]>=0.35.0",
+    "python-multipart>=0.0.20",
+
+    # LangChain + Google Gemini
+    "langchain>=1.0.0",
+    "langchain-core>=0.3.0",
+    "langchain-text-splitters>=0.3.0",
+    "langchain-google-genai>=3.0.0",
+
+    # Vector Store
+    "pinecone>=7.0.0",
+
+    # Database
+    "sqlalchemy>=2.0.41",
+    "aiosqlite>=0.21.0",
+
+    # Utilities
+    "python-dotenv>=1.1.0",
+    "httpx>=0.28.0",
+    "tenacity>=9.0.0",
+
+    # Data Processing
+    "numpy>=2.3.0",
+    "pandas>=2.3.0",
+
+    # Streamlit UI
+    "streamlit>=1.45.0",
+    "plotly>=6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.0",
+    "pytest-asyncio>=1.0.0",
+    "pytest-cov>=6.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=80.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["api*", "agents*", "config*", "core*", "data*", "path*", "ui*"]
